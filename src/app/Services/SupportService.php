@@ -14,6 +14,19 @@ class SupportService
         protected SupportRepositoryInterface $repository
     ) {}
 
+    public function paginate(
+        int $page = 1,
+        int $totalPorPage = 15,
+        string $filter = null
+
+    ){
+        return $this->repository->paginate(
+            page: $page,
+            totalPorPage: $totalPorPage,
+            filter: $filter,
+        );
+    }
+
     public function getAll(string $filter = null): array
     {
         return $this->repository->getAll($filter);

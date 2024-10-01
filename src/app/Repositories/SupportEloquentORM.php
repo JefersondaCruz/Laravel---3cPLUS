@@ -16,6 +16,20 @@ class SupportEloquentORM implements SupportRepositoryInterface
         protected Support $model
     ) {}
 
+    public function paginate(int $page = 1, int $totalPorPage = 15, string $filter = null): PaginationInterface
+    {
+
+        $result = $this->model
+                    ->where(function ($query) use ($filter) {
+                        if ($filter) {
+                            $query->where('subject', $filter);
+                            $query->orWhere('body', 'like', "%{$filter}%");
+                        }
+                    })
+                    ->paginate($totalPorPage,['*'], 'page', $page);
+        return new PaginationPresenter($result);
+    }
+
     public function getAll(string $filter = null): array
     {
 
@@ -26,7 +40,7 @@ class SupportEloquentORM implements SupportRepositoryInterface
                             $query->orWhere('body', 'like', "%{$filter}%");
                         }
                     })
-                    ->all()
+                    ->get()
                     ->toArray();
     }
 
