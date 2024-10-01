@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Repositories;
+
 use App\Repositories\SupportRepositoryInterface;
 use App\DTO\CreateSupportDTO;
 use App\Models\Support;
