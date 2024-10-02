@@ -5,6 +5,8 @@ use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Admin\{SupportController};
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get("/test", function (){
     dd(array_column(SupportStatus::cases(), 'name'));
 });
