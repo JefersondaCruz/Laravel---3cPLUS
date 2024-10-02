@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO;
+namespace App\DTO\Supports;
 
 use App\Http\Requests\StoreUpdateSupportRequest;
 
@@ -18,7 +18,7 @@ class UpdateSupportDTO
         return new self(
         $request->id,
     $request->subject,
-    'a',
+    'A',
     $request->body
         );
     }

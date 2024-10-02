@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DTO\CreateSupportDTO;
-use App\DTO\UpdateSupportDTO;
+use App\DTO\Supports\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSupportRequest;
 use App\Models\Support;
@@ -22,11 +22,14 @@ class SupportController extends Controller
     {
         $supports = $this->service->paginate(
             page: $request->get('page', 1),
-            totalPorPage: $request->get('per_page',15),
+            totalPorPage: $request->get('per_page',1),
             filter: $request->filter,
         );
 
-        return view('admin/supports/index', compact('supports'));
+        $filters = ['filter' => $request->get('filter', '')];
+
+
+        return view('admin/supports/index', compact('supports', 'filters'));
     }
 
     public function show(string|int $id)

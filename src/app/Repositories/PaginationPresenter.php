@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use illuminate\Pagination\LengthAwarePaginator;
+use stdClass;
 
 
 class PaginationPresenter implements PaginationInterface
@@ -41,7 +42,7 @@ class PaginationPresenter implements PaginationInterface
     {
         return $this->paginator->currentPage() ?? 1;
     }
-    public function getNumberNexPage(): int
+    public function getNumberNextPage(): int
     {
         return $this->paginator->currentPage() + 1;
     }
@@ -56,9 +57,10 @@ class PaginationPresenter implements PaginationInterface
         foreach ($items as $item) {
             $stdClassObject = new stdClass;
             foreach ($item->toArray() as $key => $value) {
+                $stdClassObject->$key = $value;
+            }
+            array_push($response,$stdClassObject);
         }
-
         return $response;
     }
-}
 }
